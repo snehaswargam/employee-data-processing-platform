@@ -1,56 +1,43 @@
-# This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from src.employee_processor import validators,review_func
 
 def main():
-    employees = [{
-        "employee_id": 101,
-        "name": "Julie",
-        "department": "HR",
-        "salary": 75000,
-        "joining_date": "2024-04-22",
-        "status": "Active"
-
-    },
-        {
-            "employee_id": 102,
-            "name": "Jenny",
-            "department": "Finance",
-            "salary": 90000,
-            "joining_date": "2022-03-22",
-            "status": "Active"
-
-        },
-        {
-            "employee_id": 103,
-            "name": "Gorge",
-            "department": "Sales",
-            "salary": 70000,
-            "joining_date": "2024-02-02",
-            "status": "InActive"
-        },
-        {
-            "employee_id": 202,
-            "name": "Alex",
-            "department": "Sales",
-            "salary": 85000,
-            "joining_date": "2022-05-30",
-            "status": "Active"
-        },
-        {
-            "employee_id": 333,
-            "name": "James",
-            "department": "Sales",
-            "salary": 60000,
-            "joining_date": "2022-06-30",
-            "status": "Active"
-        }
+    employees = [
+        {"employee_id": 101, "name": "Julie", "salary": 75000},
+        {"employee_id": 102, "name": "Jenny", "salary": 0},
+        {"employee_id": 103, "name": "George", "salary": 70000},
+        {"employee_id": 104, "name": "Alex", "salary": -5000},
+        {"employee_id": 105, "name": "James", "salary": 60000}
     ]
-    print(f"{len(employees)} employees")
+    gen =validators.validate_salary(employees)
+    op=[]
+    review_list=[]
 
-# Press the green button in the gutter to run the script.
+    for ele in gen:
+        if ele["comments"] == "Review":
+            review_list.append(ele)
+        else:
+            op.append(ele)
+
+    if review_list:
+
+        review_list=review_func.review(review_list)
+        gen1 = validators.validate_salary(review_list)
+        remaining_review = []
+        for ele in gen1:
+            if ele["comments"] == "Review":
+                remaining_review.append(ele)
+            else:
+                op.append(ele)
+
+        review_list=remaining_review
+    print(f"{len(op)} employees\n{op}")
+    print(f"{len(review_list)} review_list\n{review_list}")
+
+
+
+
 if __name__ == '__main__':
     main()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+

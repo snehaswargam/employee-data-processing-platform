@@ -1,0 +1,5 @@
+employee_id,name,salary
+101,Ravi,50000
+102,Priya,60000
+103,John,-1000
+104,Sita,45000
