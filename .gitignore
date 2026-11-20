@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# IDE
+.idea/
+
+# Virtual environment
+venv/
+.venv/
+
+# Environment variables
+.env
+
+# Local testing file
+test.py
